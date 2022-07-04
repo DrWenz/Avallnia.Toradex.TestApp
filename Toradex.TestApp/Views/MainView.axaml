@@ -36,7 +36,7 @@
                    Margin="0,50,0,0"
                    Classes="Rotating" />
         <Slider />
-        <Button Content="CLICK MEEEEEEEEEEEEEE"></Button>
+        <Button Content="CLICK MEEEEEEEEEEEEEE" />
 
     </StackPanel>
 </UserControl>

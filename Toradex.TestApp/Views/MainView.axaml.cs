@@ -34,4 +34,10 @@ public partial class MainView : UserControl
         PerformanceCounter.Step("First time rendered");
         first = true;
     }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Program.StaticLottieSplashToDrm?.Dispose();
+    }
 }

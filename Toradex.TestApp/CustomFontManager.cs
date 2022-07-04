@@ -74,7 +74,7 @@ public class CustomFontManagerImpl : IFontManagerImpl
                 // skTypeface = SKTypeface.FromFamilyName(typeface.FontFamily.Name,
                 //     (SKFontStyleWeight)typeface.Weight, SKFontStyleWidth.Normal, (SKFontStyleSlant)typeface.Style);
                 // break;
-                
+
                 var typefaceCollection =
                     SKTypefaceCollectionCache.GetOrAddTypefaceCollection(_defaultTypeface.FontFamily);
                 skTypeface = typefaceCollection.Get(_defaultTypeface);

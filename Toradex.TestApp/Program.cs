@@ -2,14 +2,15 @@
 using System.Linq;
 using Avalonia;
 using Avalonia.LinuxFramebuffer.Output;
-using Avalonia.OpenGL;
 using Avalonia.ReactiveUI;
+using SkiaSharp;
+using SkiaSharp.Skottie;
 
 namespace Toradex.TestApp;
 
 internal class Program
 {
-    internal static DateTime StartTime;
+    public static LottieSplashToDrm StaticLottieSplashToDrm { get; set; }
 
     // Initialization code. Don't use any Avalonia, third-party APIs or any
     // SynchronizationContext-reliant code before AppMain is called: things aren't initialized
@@ -24,18 +25,19 @@ internal class Program
             if (args.Contains("--drm"))
             {
                 var drmOutput = new DrmOutput(GetArgumentValue(args, "--card", "/dev/dri/card0")) { Scaling = 1 };
-                using (var ctx = drmOutput.CreateGlRenderTarget().BeginDraw())
+                StaticLottieSplashToDrm = new MySplash(drmOutput);
+                if (Animation.TryParse(Resources.Loading, out var animation))
                 {
-                    ctx.Context.GlInterface.ClearColor(1, 0, 1, 1);
-                    ctx.Context.GlInterface.Clear(GlConsts.GL_COLOR_BUFFER_BIT | GlConsts.GL_STENCIL_BUFFER_BIT);
+                    animation.Seek(0);
+                    StaticLottieSplashToDrm.Load(animation);
                 }
 
-                PerformanceCounter.Step("GL cleared.");
-
+                PerformanceCounter.Step("Splashscreen created.");
                 return app.StartLinuxDirect(args, drmOutput);
             }
 
-            if (args.Contains("--fbdev")) app.StartLinuxFbDev(args);
+            if (args.Contains("--fbdev"))
+                app.StartLinuxFbDev(args);
 
             return app
                 .StartWithClassicDesktopLifetime(args);
@@ -78,5 +80,21 @@ internal class Program
             }
 
         return defaultValue;
+    }
+
+    private class MySplash : LottieSplashToDrm
+    {
+        public MySplash(DrmOutput drmOutput) : base(drmOutput)
+        {
+        }
+
+        protected override void Draw(SKCanvas canvas)
+        {
+            //canvas.DrawImage(SKImage.FromEncodedData("/home/pi/splash.png"), 0, 0);
+            // canvas.Flush();
+            canvas.Clear(SKColors.White);
+
+            base.Draw(canvas);
+        }
     }
 }
