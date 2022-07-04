@@ -1,13 +1,13 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using Avalonia.Rendering;
+using Avalonia.Media;
 
 namespace Toradex.TestApp.Views;
 
 public partial class MainView : UserControl
 {
-    private bool first;
+    private bool _isFirstTimeRendered = true;
 
     public MainView()
     {
@@ -23,21 +23,18 @@ public partial class MainView : UserControl
     {
         PerformanceCounter.Step("OnAttachedToVisualTree");
         e.Root.Renderer.DrawFps = true;
-        e.Root.Renderer.SceneInvalidated += RendererOnSceneInvalidated;
         base.OnAttachedToVisualTree(e);
     }
 
-    private void RendererOnSceneInvalidated(object? sender, SceneInvalidatedEventArgs e)
+    public override void Render(DrawingContext context)
     {
-        if (first)
-            return;
-        PerformanceCounter.Step("First time rendered");
-        first = true;
-    }
+        if (_isFirstTimeRendered)
+        {
+            _isFirstTimeRendered = false;
+            Program.StaticLottieSplashToDrm?.Dispose();
+            PerformanceCounter.Step("First time rendered");
+        }
 
-    protected override void OnInitialized()
-    {
-        base.OnInitialized();
-        Program.StaticLottieSplashToDrm?.Dispose();
+        base.Render(context);
     }
 }

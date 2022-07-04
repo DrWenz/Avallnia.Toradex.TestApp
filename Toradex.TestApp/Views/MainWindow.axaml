@@ -9,5 +9,7 @@
         x:Class="Toradex.TestApp.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="Toradex.TestApp">
-    <views:MainView />
+    <Viewbox>
+        <views:MainView />
+    </Viewbox>
 </Window>

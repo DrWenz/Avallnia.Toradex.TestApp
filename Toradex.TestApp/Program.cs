@@ -56,7 +56,6 @@ internal class Program
     {
         return AppBuilder.Configure<App>()
             .UsePlatformDetect()
-            .UseFluentTheme()
             .UseReactiveUI();
     }
 

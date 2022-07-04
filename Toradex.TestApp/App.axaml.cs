@@ -1,6 +1,10 @@
 using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Markup.Xaml;
 using Avalonia.Platform;
+using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView;
 using Toradex.TestApp.Views;
 
 namespace Toradex.TestApp;
@@ -10,7 +14,7 @@ public class App : Application
     public override void Initialize()
     {
         PerformanceCounter.Step("App-Initialize");
-        //AvaloniaXamlLoader.Load(this);
+        AvaloniaXamlLoader.Load(this);
         PerformanceCounter.Step("App AvaloniaXamlLoader loaded");
     }
 
@@ -22,7 +26,10 @@ public class App : Application
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             desktop.MainWindow = new MainWindow();
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleView)
-            singleView.MainView = new MainView();
+            singleView.MainView = new Viewbox
+            {
+                Child = new MainView()
+            };
 
         base.OnFrameworkInitializationCompleted();
     }

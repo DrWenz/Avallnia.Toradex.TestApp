@@ -14,21 +14,4 @@ public static class AppBuilderMinimalExtensions
             builder.Instance.Styles.Add(
                 new FluentTheme(new Uri($"avares://{Assembly.GetExecutingAssembly().GetName()}")) { Mode = mode }));
     }
-
-    public static int StartWithClassicDesktopLifetime<T>(this T builder,
-        Action<IClassicDesktopStyleApplicationLifetime> callback, string[]? args,
-        ShutdownMode shutdownMode = ShutdownMode.OnLastWindowClose) where T : AppBuilderBase<T>, new()
-    {
-        var classicDesktopStyleApplicationLifetime = new ClassicDesktopStyleApplicationLifetime
-        {
-            Args = args,
-            ShutdownMode = shutdownMode
-        };
-
-        builder.SetupWithLifetime(classicDesktopStyleApplicationLifetime);
-
-        callback?.Invoke(classicDesktopStyleApplicationLifetime);
-
-        return classicDesktopStyleApplicationLifetime.Start(args);
-    }
 }
