@@ -1,0 +1,42 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignWidth="800"
+             d:DesignHeight="450"
+             x:Class="Toradex.TestApp.Views.MainView">
+
+    <UserControl.Styles>
+        <Style Selector="Rectangle.Rotating">
+            <Style.Animations>
+                <Animation Duration="0:0:1"
+                           IterationCount="Infinite">
+                    <KeyFrame Cue="0%">
+                        <Setter Property="RotateTransform.Angle"
+                                Value="0" />
+                    </KeyFrame>
+                    <KeyFrame Cue="100%">
+                        <Setter Property="RotateTransform.Angle"
+                                Value="360" />
+                    </KeyFrame>
+                </Animation>
+            </Style.Animations>
+        </Style>
+    </UserControl.Styles>
+
+    <StackPanel Orientation="Vertical"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center">
+        <TextBlock Text="Hello from Avalonia on Toradex-Minimal-Image :)"
+                   FontSize="30" />
+        <Rectangle Width="50"
+                   Height="50"
+                   Fill="Red"
+                   Margin="0,50,0,0"
+                   Classes="Rotating" />
+        <Slider />
+        <Button Content="CLICK MEEEEEEEEEEEEEE"></Button>
+
+    </StackPanel>
+</UserControl>
