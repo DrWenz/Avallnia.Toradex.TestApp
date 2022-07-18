@@ -6,6 +6,8 @@
         mc:Ignorable="d"
         d:DesignWidth="800"
         d:DesignHeight="450"
+        Width="1920"
+        Height="1080"
         x:Class="Toradex.TestApp.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="Toradex.TestApp">

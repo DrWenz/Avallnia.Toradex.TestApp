@@ -12,11 +12,11 @@
 
     <Style Selector="Button.Power">
         <Setter Property="Width"
-                Value="60" />
+                Value="80" />
         <Setter Property="Height"
-                Value="60" />
+                Value="80" />
         <Setter Property="CornerRadius"
-                Value="30" />
+                Value="40" />
         <Setter Property="Background"
                 Value="White" />
         <Setter Property="BorderThickness"
@@ -48,9 +48,9 @@
             <ControlTemplate>
                 <Panel>
                     <Border x:Name="PART_Border"
-                            BoxShadow="0 0 10 0 #F0F0F0"
+                            BoxShadow="0 0 10 0 Gray"
                             CornerRadius="{TemplateBinding CornerRadius}"
-                            Margin="5">
+                            Margin="7.5">
                         <ContentPresenter x:Name="PART_ContentPresenter"
                                           Background="{TemplateBinding Background}"
                                           BorderBrush="{TemplateBinding BorderBrush}"

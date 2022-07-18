@@ -3,8 +3,6 @@ using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Avalonia.Platform;
-using LiveChartsCore;
-using LiveChartsCore.SkiaSharpView;
 using Toradex.TestApp.Views;
 
 namespace Toradex.TestApp;
@@ -30,7 +28,12 @@ public class App : Application
             {
                 Child = new MainView()
             };
-
         base.OnFrameworkInitializationCompleted();
+        StartServices();
+    }
+
+    private void StartServices()
+    {
+        // TODO
     }
 }

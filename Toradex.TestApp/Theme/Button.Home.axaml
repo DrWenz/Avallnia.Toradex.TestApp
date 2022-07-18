@@ -1,16 +1,16 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia">
-   <Design.PreviewWith>
+    <Design.PreviewWith>
         <Border Padding="20">
-            <Button Classes="Back"
+            <Button Classes="Home"
                     HorizontalAlignment="Right"
                     VerticalAlignment="Top"
-                    Margin="0,20,20,0"/>
+                    Margin="0,20,20,0" />
         </Border>
     </Design.PreviewWith>
 
-    <Style Selector="Button.Back">
+    <Style Selector="Button.Home">
         <Setter Property="Width"
                 Value="80" />
         <Setter Property="Height"
@@ -27,7 +27,8 @@
             <Setter.Value>
                 <Template>
                     <Viewbox>
-                        <avalonia:MaterialIcon Kind="ArrowLeft" Foreground="Gray"/>
+                        <avalonia:MaterialIcon Kind="Home"
+                                               Foreground="Gray" />
                     </Viewbox>
                 </Template>
             </Setter.Value>
@@ -56,11 +57,11 @@
         </Setter>
     </Style>
 
-    <Style Selector="Button.Back:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+    <Style Selector="Button.Home:pointerover /template/ ContentPresenter#PART_ContentPresenter">
         <Setter Property="Background"
                 Value="#F0F0F0" />
     </Style>
-    <Style Selector="Button.Back:pressed /template/ ContentPresenter#PART_ContentPresenter">
+    <Style Selector="Button.Home:pressed /template/ ContentPresenter#PART_ContentPresenter">
         <Setter Property="Background"
                 Value="#D4D4D4" />
     </Style>

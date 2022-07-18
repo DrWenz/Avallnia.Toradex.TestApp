@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
+using System.Text;
 using Avalonia;
 using Avalonia.LinuxFramebuffer.Output;
 using Avalonia.ReactiveUI;
@@ -25,12 +27,11 @@ internal class Program
             if (args.Contains("--drm"))
             {
                 var drmOutput = new DrmOutput(GetArgumentValue(args, "--card", "/dev/dri/card0")) { Scaling = 1 };
+                PerformanceCounter.Step("DrmOutput created.");
                 StaticLottieSplashToDrm = new MySplash(drmOutput);
-                if (Animation.TryParse(Resources.Loading, out var animation))
-                {
-                    animation.Seek(0);
-                    StaticLottieSplashToDrm.Load(animation);
-                }
+                var animation = Animation.Create(new MemoryStream(Encoding.UTF8.GetBytes(Resources.Loading)));
+                animation.Seek(0);
+                StaticLottieSplashToDrm.Load(animation);
 
                 PerformanceCounter.Step("Splashscreen created.");
                 return app.StartLinuxDirect(args, drmOutput);
